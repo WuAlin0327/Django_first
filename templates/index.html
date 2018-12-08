@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>index</title>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <a href="/app1/timer/">显示当前时间戳</a>
+    <hr>
+    <h3>普通查询</h3>
+    <p>{{ name }}</p>
+    <p>{{ lis }}</p>
+    <p>{{ dic }}</p>
+    <p>{{ alex }}</p>
+    <p>{{ egon }}</p>
+    <p>{{ person_list }}</p>
+
+    <hr>
+    <h3>深度查询</h3>
+    <p>{{ lis.1 }}</p>
+    <p>{{ dic.name }}</p>
+    <p>{{ alex.name }}</p>
+    <p>{{ person_list.1.name }}</p>
+
+    <hr>
+    <h3>过滤器</h3>
+    {#  过滤时间  #}
+    <p>对时间进行格式化：{{ now|date:'Y-m-d' }}</p>
+    <p>对文件大小进行格式化：{{ filesize|filesizeformat }}</p>
+    <p>对字符串进行切片：{{ name|slice:"0:2" }}</p>
+    <p>{{ text|truncatechars:9 }}</p>
+
+    <hr>
+    <h3>标签</h3>
+
+    <h4>for标签</h4>
+    {% for i in lis %}
+    <p>{{ i }}</p>
+    {% endfor %}
+    {% for k in person_list %}
+    {#    forloop.counter必须放在循环内部，打印序号    #}
+    <p>{{ forloop.counter0 }}--{{ k.name }}---  {{ k.age }}</p>
+    {% endfor %}
+
+    {#  for ... empty 假设循环的列表为空，则会打印empty的内容 #}
+    {% for i in lis %}
+    <p>{{ i }}</p>
+    {% empty %}
+    <p>列表为空</p>
+    {% endfor %}
+    <h4>if标签</h4>
+    {% if user %}
+        <p><a href="#">hi welcome:{{ user }}</a>   <a href="#">注销</a></p>
+    {% else %}
+        <p><a href="#">登陆</a>  <a href="#">注册</a></p>
+
+    {% endif %}
+    <hr>
+{% with dic.name as username %}
+    {{ username }}
+    {{ username }}
+
+{% endwith %}
+    <hr>
+    <h4>自定义过滤器</h4>
+    {# 导入自定义的模块 #}
+    {% load my_tag_filter %}
+    {{ i|multi_filter:2 }}
+    {% multi_tag 2 3 %}
+{% endblock %}
