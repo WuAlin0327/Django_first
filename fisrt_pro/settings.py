@@ -76,10 +76,41 @@ WSGI_APPLICATION = 'fisrt_pro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+#默认的数据库
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+#自己的数据库
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'ormdb',# 要连接的数据库，连接前需要创建好
+        'USER':'root',# 连接数据库的用户名
+        'PASSWORD':'123456', # 连接数据库的密码
+        'HOST':'127.0.0.1',# 连接主机，默认本级
+        'PORT':3306   #端口 默认3306
+    }
+}
+# 打印orm转换过程中的SQL语句
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
     }
 }
 
