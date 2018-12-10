@@ -11,6 +11,7 @@ urlpatterns = [
     path("dborm/",views.dborm),
     path("book/",views.book),
     path("add_book/",views.add_book),
-        path("book/<int:num>/edit",views.edit),
-    path("book/<int:num>/delete",views.del_date)
+    path("book/<int:num>/edit",views.edit),
+    path("book/<int:num>/delete",views.del_date),
+    path("add/",views.add)
 ]

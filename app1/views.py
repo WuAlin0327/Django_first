@@ -75,7 +75,7 @@ def index(request):
 
     return render(request,'index.html',locals())
 
-from app1.models import Book #添加models中定义好的ORM类
+from app1.models import * #添加models中定义好的ORM类
 def dborm(request):
     #添加表记录
     #方式1
@@ -155,3 +155,11 @@ def del_date(request,num):
 
 def add_book(request):
     return render(request,'add_book.html')
+
+def add(request):
+    book_obj = Books.objects.filter(bid=1)[0]
+    print(book_obj.b_name)
+    print(book_obj.publish) #Publish object (2)
+    print(book_obj.publish.p_name) #南京出版社
+    print(book_obj.publish_id) # 2
+    return HttpResponse('ok')
